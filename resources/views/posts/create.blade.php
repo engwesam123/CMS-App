@@ -36,7 +36,8 @@
                </div>
                <div class="form-floating form-group">
                    <label for="content">content :</label>
-                   <textarea class="form-control" placeholder="Enter content" name="content" rows="3"></textarea>
+                   <input id="x" type="hidden" name="content">
+                   <trix-editor input="x"></trix-editor>
                </div>
                <div class="form-floating form-group">
                    <label for="content">Image :</label>
@@ -49,4 +50,7 @@
            </form>
        </div>
    </div>
+@endsection
+@section('scripts')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js"></script>
 @endsection

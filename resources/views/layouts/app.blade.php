@@ -15,6 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -90,6 +91,9 @@
                             <li class="list-group-item">
                                 <a href="{{route('categories.index')}}">Catergories</a>
                             </li>
+                            <li class="list-group-item">
+                                <a href="{{route('trashed.index')}}">Trashed</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-md-8">
@@ -105,5 +109,6 @@
             </main>
         @endauth
     </div>
+    @yield('scripts')
 </body>
 </html>
