@@ -12,7 +12,6 @@
                   <table class="table">
                       <thead>
                       <tr>
-                          <th scope="col">#</th>
                           <th scope="col">Title</th>
                           <th scope="col">description</th>
                           <th scope="col">content</th>
@@ -23,15 +22,17 @@
                       @foreach($posts as $post)
                           <tbody>
                           <tr>
-                              <th scope="row">{{$post->id}}</th>
                               <td>{{$post->title}}</td>
                               <td>{{$post->description}}</td>
                               <td>{{$post->content}}</td>
-                              <td><img src="{{asset('storage/'.$post->image)}}"
-                                       width="100px" height="100px"></td>
+                              <td>
+                                  <img src="{{asset('storage/'.$post->image)}}"
+                                       width="100px" height="100px">
+                              </td>
                               <td>
                                   @if(!$post->trashed())
                                       <a href="{{route('posts.edit', $post->id)}}" type="button" class="btn btn-primary">Edit</a>
+                                      <a href="{{route('posts.edit', $post->id)}}" type="button" class="btn btn-primary">Restore</a>
                                   @endif
                                   <form CLASS="float-right" action="{{route('posts.destroy', $post->id)}}" method="POST">
                                       @CSRF

@@ -3,7 +3,7 @@
 @section('content')
    <div class="card card-default">
        <div class="card-header">
-           {{isset($post) ? 'Edit Post' :    ' Add new post' }}
+           {{isset($post) ? "Update Post" : "Add new post" }}
        </div>
 
        @if ($errors->any())
@@ -28,17 +28,24 @@
                    <label for="title">title : </label>
                    <input type="text" name="title"  class="form-control"
                           placeholder = "Add a new post"
-                          value="{{isset($post) ? $post->name : "" }}">
+                          value="{{isset($post) ? $post->title : "" }}">
                </div>
                <div class="form-floating form-group">
                    <label for="description">description :</label>
-                   <textarea class="form-control" placeholder="Enter description"  name="description" rows="2"></textarea>
+                   <textarea class="form-control" placeholder="Enter description"
+                             name="description" rows="2" >value="{{isset($post) ? $post->description : "" }}</textarea>
                </div>
                <div class="form-floating form-group">
                    <label for="content">content :</label>
-                   <input id="x" type="hidden" name="content">
+                   <input id="x" type="hidden" name="content" value="{{isset($post) ? $post->content : "" }}">
                    <trix-editor input="x"></trix-editor>
                </div>
+               @if(isset($post))
+               <div class="form-group">
+                   <img src="{{asset('storage/' . $post->image)}}"
+                        style=" width: 100%">
+               </div>
+               @endif
                <div class="form-floating form-group">
                    <label for="content">Image :</label>
                    <input type="file" name="image" class="form-control">

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostsRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,18 +24,9 @@ class PostsRequest extends FormRequest
     public function rules()
     {
         return [
-            "title" => "required|unique:posts",
-            "description" => "required ",
-            "content" => "required ",
-            "image" => "required|image"
-
-        ];
-    }
-    public function messages()
-    {
-        return [
-            'title.required' => 'A title is required',
-            'title.unique' => 'A title is must be not duplicated'
+            "title" => "required",
+            "description" => "required",
+            "content" => "required"
         ];
     }
 }

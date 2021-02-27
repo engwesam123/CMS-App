@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PostsRequest;
+use App\Http\Requests\UpdateRequest;
 use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,12 +39,11 @@ class PostsController extends Controller
     public function store(PostsRequest $request)
     {
 
-
         Post::create([
             'title' => $request->title,
             'description' => $request->description,
             'content' => $request->content,
-            'image' => $request->image->store('image', 'public')
+            'image' => $request->image->store('images', 'public')
         ]);
 
         session()->flash('success', 'Post created successfully');
@@ -70,7 +70,7 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.create')->with('posts', $post);
+        return view('posts.create')->with('post', $post);
 
     }
 
@@ -81,14 +81,15 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(UpdateRequest $request, Post $post)
     {
-        $post->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'content' => $request->content,
-            'image' => $request->image,
-        ]);
+        $data = $request->only(['title', 'description', 'content']);
+        if ($request->hasFile('image')){
+            $image = $request->image->store('images', 'public');
+            Storage::disk('public')->delete($post->image);
+            $data['image'] = $image;
+        }
+        $post->update($data);
 
         session()->flash('success', 'Post created successfully');
 
